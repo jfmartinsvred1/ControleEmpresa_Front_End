@@ -4,8 +4,6 @@ import ListaSuspensa from '../ListaSuspensa';
 import Botao from '../Botao';
 import { useState } from 'react';
 const Formulario = (props) =>{
-    const setores =['TI','ENGENHARIA','RECURSOS HUMANOS','DESIGN']
-
     const [nome, setNome] = useState('')
     const [data, setData] = useState('')
     const [dataContratacao, setDataContratacao] = useState('')
@@ -49,7 +47,7 @@ const Formulario = (props) =>{
                 />
                 <ListaSuspensa 
                 label="Setor"
-                 itens={setores}
+                 itens={props.setores}
                  valor={setor}
                  aoAlterado={valor => setSetor(valor)}
                  />
