@@ -1,17 +1,17 @@
 import './Funcionario.css'
 
-const Funcionario  = () => {
+const Funcionario  = (props) => {
     return (
-        <div>
-            <div>
+        <div className='funcionario'>
+            <div className='cabecalho'>
                 <img 
                 src='https://github.com/jfmartinsvred1.png'
                 alt='foto de perfil'
                 />
             </div>
-            <div>
-                <h4>João Victor Fernandes Martins</h4>
-                <h5>Programador</h5>
+            <div className='rodape'>
+                <h4>{props.nome}</h4>
+                <h5>{props.setor}</h5>
             </div>
         </div>
     )

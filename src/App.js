@@ -4,10 +4,10 @@ import Formulario from './Componentes/Formulario';
 import Setor from './Componentes/Setor';
 
 function App() {
-  const [funcionarioCadastrado,setFuncionarioCadastrado]=useState([])
+  const [funcionarioCadastrado,setFuncionarioCadastrado] = useState([])
 
   const aoNovoFuncionarioAdicionado = (funcionario) =>{
-    console.log(funcionario)
+    setFuncionarioCadastrado([...funcionarioCadastrado,funcionario])
   }
 
   const setores = [
@@ -36,13 +36,17 @@ function App() {
   return (
     <div className="App">
       <Banner />
-      <Formulario setores={setores.map(setor => setor.nome)} aoFuncionarioAdicionado={funcionario => aoNovoFuncionarioAdicionado(funcionario)} />
+      <Formulario 
+      setores={setores.map(setor => setor.nome)} 
+      aoFuncionarioAdicionado={funcionario => aoNovoFuncionarioAdicionado(funcionario)}
+      />
       {setores.map(setor=>
       <Setor 
       key={setor.nome}
       corPrimaria={setor.corPrimaria}
       corSecundaria={setor.corSecundaria} 
       nome={setor.nome}
+      funcionarios = {funcionarioCadastrado.filter(funcionario => funcionario.setor === setor.nome)}
       />
       )}
     </div>
