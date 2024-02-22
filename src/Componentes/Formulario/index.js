@@ -2,21 +2,57 @@ import './Formulario.css';
 import CampoTexto from '../CampoTexto';
 import ListaSuspensa from '../ListaSuspensa';
 import Botao from '../Botao';
-const Formulario = () =>{
+import { useState } from 'react';
+const Formulario = (props) =>{
     const setores =['TI','ENGENHARIA','RECURSOS HUMANOS','DESIGN']
+
+    const [nome, setNome] = useState('')
+    const [data, setData] = useState('')
+    const [dataContratacao, setDataContratacao] = useState('')
+    const [setor, setSetor] = useState('');
 
     const aoSalvar =(evento) => {
         evento.preventDefault()
-        console.log("submetido")
+        props.aoFuncionarioAdicionado({
+            nome,
+            data,
+            dataContratacao,
+            setor
+        })
     }
+
     return(
         <section className='formulario'>
             <form onSubmit={aoSalvar}>
                 <h2>Preencha os dados do funcionário</h2>
-                <CampoTexto required={true} label="Nome" placeholder="Digite o nome do funcionário"/>
-                <CampoTexto required={true} label="Data De Nascimento" tipo="date"/>
-                <CampoTexto required={true} label="Data De Contratação" tipo="date"/>
-                <ListaSuspensa label="Setor" itens={setores}/>
+                <CampoTexto required={true}
+                label="Nome"
+                placeholder="Digite o nome do funcionário"
+                valor={nome}
+                aoAlterado={valor =>setNome(valor)}
+
+                />
+                <CampoTexto 
+                required={true} 
+                label="Data De Nascimento" 
+                tipo="date"
+                valor={data}
+                aoAlterado={valor => setData(valor)}
+                />
+                <CampoTexto 
+                required={true} 
+                label="Data De Contratação" 
+                tipo="date"
+                valor={dataContratacao}
+                aoAlterado={valor => setDataContratacao(valor)}
+
+                />
+                <ListaSuspensa 
+                label="Setor"
+                 itens={setores}
+                 valor={setor}
+                 aoAlterado={valor => setSetor(valor)}
+                 />
                 <Botao>
                     Adicionar
                 </Botao>
