@@ -3,7 +3,7 @@ import logo from '../../Images/Banner.jpg';
 function Banner(){
     return(
         <header className="banner">
-             <img src={logo} alt="minha imagem"/>
+            <h1>Controle Empresa</h1>
         </header>
     )
 }

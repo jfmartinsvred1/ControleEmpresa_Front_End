@@ -9,6 +9,7 @@ const Formulario = (props) =>{
     const [dataContratacao, setDataContratacao] = useState('')
     const [setor, setSetor] = useState('');
 
+
     const aoSalvar =(evento) => {
         evento.preventDefault()
         props.aoFuncionarioAdicionado({

@@ -7,7 +7,8 @@ function App() {
   const [funcionarioCadastrado,setFuncionarioCadastrado] = useState([])
 
   const aoNovoFuncionarioAdicionado = (funcionario) =>{
-    setFuncionarioCadastrado([...funcionarioCadastrado,funcionario])
+    setFuncionarioCadastrado
+    ([...funcionarioCadastrado,funcionario])
   }
 
   const setores = [

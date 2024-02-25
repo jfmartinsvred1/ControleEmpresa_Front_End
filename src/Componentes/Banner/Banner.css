@@ -1,7 +1,10 @@
 .banner{
     background-color:#115174;
-    text-align: center;
-}
-.banner img{
-    max-width: 100%;
+    background-image: url(../../Images/Banner.jpg);
+    height: 150px;
+    align-items: center;
+    color: #fff;
+    font-family:Verdana, Tahoma, sans-serif;
+    display: flex;
+    justify-content: center;
 }

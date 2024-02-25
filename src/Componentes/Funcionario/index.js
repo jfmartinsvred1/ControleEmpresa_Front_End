@@ -3,11 +3,11 @@ import './Funcionario.css'
 const Funcionario  = (props) => {
     return (
         <div className='funcionario'>
-            <div className='cabecalho'>
-                <img 
+            <div className='cabecalho' style={{backgroundColor: props.corDeFundo}}>
+                {/* <img 
                 src='https://github.com/jfmartinsvred1.png'
                 alt='foto de perfil'
-                />
+                /> */}
             </div>
             <div className='rodape'>
                 <h4>{props.nome}</h4>
