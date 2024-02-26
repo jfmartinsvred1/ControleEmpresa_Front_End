@@ -3,7 +3,7 @@ import './Funcionario.css'
 const Funcionario  = (props) => {
     return (
         <div className='funcionario'>
-            <div className='deletar' onClick={props.aoDeletar}> deletar </div>
+            <div className='deletar' onClick={()=>props.aoDeletar(props.id)}> deletar </div>
             <div className='cabecalho' style={{backgroundColor: props.corDeFundo}}>
                 <img 
                     src='https://github.com/jfmartinsvred1.png'

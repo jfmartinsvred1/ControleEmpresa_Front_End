@@ -5,15 +5,16 @@ import './Setor.css'
 const Setor = (props) => {
     
     return (
-        (props.funcionarios.length > 0) && <section className='setor' style={{backgroundColor:hexToRgba(props.cor, "0.4")}}>
-            <input value={props.cor} onChange={evento=> props.mudarCor(evento.target.value,props.nome)} type='color' className='input-color'/>
+        (props.funcionarios.length > 0) && <section className='setor' style={{backgroundColor:hexToRgba(props.cor, "0.45")}}>
+            <input onChange={e=>props.mudarCor(e.target.value, props.id)} type='color' value={props.cor} className='input-color'/>
             <h3 style={{borderColor:props.cor}}>{props.nome}</h3>
             <div className='funcionarios'>
             {props.funcionarios.map(funcionario => 
                 {
                     return (
                         <Funcionario
-                            key={funcionario.nome} 
+                            key={funcionario.nome}
+                            id={funcionario.id} 
                             nome={funcionario.nome}
                             corDeFundo={props.cor}
                             setor={funcionario.setor}
