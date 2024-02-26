@@ -11,44 +11,59 @@ function App() {
     ([...funcionarioCadastrado,funcionario])
   }
 
-  const setores = [
+  const [setores, setSetor] = useState( [
     {
       nome: 'TI',
-      corPrimaria:'#82CFFA',
-      corSecundaria:'#E8F8FF'
+      cor:'#82CFFA'
     },
     {
       nome: 'ENGENHARIA',
-      corPrimaria:'#E06B69',
-      corSecundaria:'#FDE7E8'
+      cor:'#E06B69'
     },
     {
       nome: 'RECURSOS HUMANOS',
-      corPrimaria:'#57C278',
-      corSecundaria:'#D9F7E9'
+      cor:'#57C278'
     },
     {
       nome: 'DESIGN',
-      corPrimaria:'#DB6EBF',
-      corSecundaria:'#FAE9F5'
+      cor:'#DB6EBF'
     },
-  ]
+  ])
+
+  function deletarColaborador(){
+    console.log('deletar colaborador');
+  }
+
+  function mudarCorFuncionario(cor,nome){
+    setSetor(setores.map(setor=>{
+      if(setor.nome === nome){
+        setor.cor=cor
+      }
+      return setor;
+    }))
+  }
 
   return (
     <div className="App">
       <Banner />
       <Formulario 
-      setores={setores.map(setor => setor.nome)} 
-      aoFuncionarioAdicionado={funcionario => aoNovoFuncionarioAdicionado(funcionario)}
+        setores={setores.map(setor => setor.nome)} 
+        aoFuncionarioAdicionado={
+          funcionario => aoNovoFuncionarioAdicionado(funcionario)}
       />
       {setores.map(setor=>
-      <Setor 
-      key={setor.nome}
-      corPrimaria={setor.corPrimaria}
-      corSecundaria={setor.corSecundaria} 
-      nome={setor.nome}
-      funcionarios = {funcionarioCadastrado.filter(funcionario => funcionario.setor === setor.nome)}
-      />
+        <Setor 
+          key={setor.nome}
+          cor={setor.cor}
+          mudarCor={mudarCorFuncionario} 
+          nome={setor.nome}
+          funcionarios = {
+            funcionarioCadastrado.filter(
+              funcionario => funcionario.setor === setor.nome
+            )
+          }
+          aoDeletar={deletarColaborador}
+        />
       )}
     </div>
   );
