@@ -5,45 +5,27 @@ import Formulario from './Componentes/Formulario';
 import Setor from './Componentes/Setor';
 
 function App() {
-  const funcionarios=[
-    {
-      id:uuidv4(),
-      nome:"JOAO VICTOR",
-      data:"2002-02-08",
-      dataContratacao:"2002-02-08",
-      setor:"TI"
-    },
-    {
-      id:uuidv4(),
-      nome:"JOAO VICTOR",
-      data:"2002-02-08",
-      dataContratacao:"2002-02-08",
-      setor:"DESIGN"
-    },
-    {
-      id:uuidv4(),
-      nome:"JOAO VICTOR",
-      data:"2002-02-08",
-      dataContratacao:"2002-02-08",
-      setor:"RECURSOS HUMANOS"
-    },
-    {
-      id:uuidv4(),
-      nome:"JOAO VICTOR",
-      data:"2002-02-08",
-      dataContratacao:"2002-02-08",
-      setor:"ENGENHARIA"
-    },
+  const [funcionarioCadastrado,setFuncionarioCadastrado] = useState([])
 
-  ]
-  const [funcionarioCadastrado,setFuncionarioCadastrado] = useState(funcionarios)
+  const retornaFuncionarios = () =>{
+    fetch('https://localhost:7128/Funcionario', {
+    method:'GET',
+    headers:{
+      'Content-Type': 'application/json',
+    },
+  }).then(resp=>resp.json())
+  .then((data)=>{
+    setFuncionarioCadastrado(data)
+  })
 
-  const aoNovoFuncionarioAdicionado = (funcionario) =>{
-    setFuncionarioCadastrado
-    ([...funcionarioCadastrado,funcionario])
   }
   
 
+  const aoNovoFuncionarioAdicionado = (funcionario) =>{
+    retornaFuncionarios()
+    setFuncionarioCadastrado
+    ([...funcionarioCadastrado,funcionario])
+  }
   const [setores, setSetor] = useState( [
     {
       id:uuidv4(),
@@ -68,7 +50,7 @@ function App() {
   ])
 
   function deletarColaborador(id){
-    setFuncionarioCadastrado(funcionarioCadastrado.filter(funcionario=>funcionario.id !== id))
+    setFuncionarioCadastrado(funcionarioCadastrado.filter(funcionario=>funcionario.funcionarioId !== id))
   }
 
   function mudarCorFuncionario(cor,id){
@@ -97,7 +79,7 @@ function App() {
           nome={setor.nome}
           funcionarios = {
             funcionarioCadastrado.filter(
-              funcionario => funcionario.setor === setor.nome
+              funcionario => funcionario.setor.nome === setor.nome
             )
           }
           aoDeletar={deletarColaborador}

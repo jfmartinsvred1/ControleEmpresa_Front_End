@@ -13,8 +13,8 @@ const Setor = (props) => {
                 {
                     return (
                         <Funcionario
-                            key={funcionario.nome}
-                            id={funcionario.id} 
+                            key={funcionario.funcionarioId}
+                            id={funcionario.funcionarioId} 
                             nome={funcionario.nome}
                             corDeFundo={props.cor}
                             setor={funcionario.setor}

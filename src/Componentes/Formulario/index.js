@@ -5,17 +5,17 @@ import Botao from '../Botao';
 import { useState } from 'react';
 const Formulario = (props) =>{
     const [nome, setNome] = useState('')
-    const [data, setData] = useState('')
-    const [dataContratacao, setDataContratacao] = useState('')
-    const [setor, setSetor] = useState('');
+    const [dataDeNascimento, setData] = useState('')
+    const [dataDeContratacao, setDataContratacao] = useState('')
+    const [setor, setSetor] = useState({});
 
 
     const aoSalvar =(evento) => {
         evento.preventDefault()
         props.aoFuncionarioAdicionado({
             nome,
-            data,
-            dataContratacao,
+            dataDeNascimento,
+            dataDeContratacao,
             setor
         })
     }
@@ -35,21 +35,21 @@ const Formulario = (props) =>{
                 required={true} 
                 label="Data De Nascimento" 
                 tipo="date"
-                valor={data}
+                valor={dataDeNascimento}
                 aoAlterado={valor => setData(valor)}
                 />
                 <CampoTexto 
                 required={true} 
                 label="Data De Contratação" 
                 tipo="date"
-                valor={dataContratacao}
+                valor={dataDeContratacao}
                 aoAlterado={valor => setDataContratacao(valor)}
 
                 />
                 <ListaSuspensa 
                 label="Setor"
                  itens={props.setores}
-                 valor={setor}
+                 valor={setor.nome}
                  aoAlterado={valor => setSetor(valor)}
                  />
                 <Botao>
