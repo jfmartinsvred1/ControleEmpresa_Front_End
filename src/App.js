@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Banner from './Componentes/Banner';
 import { v4 as uuidv4 } from 'uuid';
 import Formulario from './Componentes/Formulario';
@@ -7,24 +7,36 @@ import Setor from './Componentes/Setor';
 function App() {
   const [funcionarioCadastrado,setFuncionarioCadastrado] = useState([])
 
-  const retornaFuncionarios = () =>{
-    fetch('https://localhost:7128/Funcionario', {
+    useEffect(()=>{
+      fetch('https://localhost:7128/Funcionario', {
     method:'GET',
     headers:{
       'Content-Type': 'application/json',
     },
-  }).then(resp=>resp.json())
-  .then((data)=>{
-    setFuncionarioCadastrado(data)
-  })
+    })
+    .then(resp=>resp.json())
+    .then((data)=>{
+      setFuncionarioCadastrado(data)
+    })
+    .catch((error)=>console.log(error))
+    },[])
 
-  }
-  
+
+
 
   const aoNovoFuncionarioAdicionado = (funcionario) =>{
-    retornaFuncionarios()
+    console.log(funcionario)
+    const newFunc={
+      funcionarioId:funcionario.funcionarioId,
+      nome:funcionario.nome,
+      dataDeNascimento:funcionario.dataDeNascimento,
+      dataDeContratacao:funcionario.dataDeContratacao,
+      setor:{
+        nome:funcionario.setor
+      }
+    }
     setFuncionarioCadastrado
-    ([...funcionarioCadastrado,funcionario])
+    ([...funcionarioCadastrado,newFunc])
   }
   const [setores, setSetor] = useState( [
     {
@@ -34,7 +46,7 @@ function App() {
     },
     {
       id:uuidv4(),
-      nome: 'ENGENHARIA',
+      nome: 'Engenharia',
       cor:'#E06B69'
     },
     {

@@ -3,16 +3,18 @@ import CampoTexto from '../CampoTexto';
 import ListaSuspensa from '../ListaSuspensa';
 import Botao from '../Botao';
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 const Formulario = (props) =>{
     const [nome, setNome] = useState('')
     const [dataDeNascimento, setData] = useState('')
     const [dataDeContratacao, setDataContratacao] = useState('')
-    const [setor, setSetor] = useState({});
+    const [setor, setSetor] = useState({nome:"th"});
 
 
     const aoSalvar =(evento) => {
         evento.preventDefault()
         props.aoFuncionarioAdicionado({
+            funcionarioId:uuidv4(),
             nome,
             dataDeNascimento,
             dataDeContratacao,

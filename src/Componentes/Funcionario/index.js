@@ -12,7 +12,7 @@ const Funcionario  = (props) => {
             </div>
             <div className='rodape'>
                 <h4>{props.nome}</h4>
-                <h5>{props.nome}</h5>
+                <h5>{props.setor.nome}</h5>
         </div>
         </div>
     )
