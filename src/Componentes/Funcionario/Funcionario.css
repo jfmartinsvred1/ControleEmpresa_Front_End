@@ -1,6 +1,7 @@
 .funcionario {
     width: 280px;
     position: relative;
+    margin-bottom: 8px;
 }
 
 .funcionario .cabecalho {
@@ -40,4 +41,11 @@
     position: absolute;
     right: -10px;
     top: -10px;
+}
+.botoes{
+    justify-content: center;
+    display: flex;
+}
+.botao{
+    margin: 4px;
 }

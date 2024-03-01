@@ -7,6 +7,8 @@ import Setor from './Componentes/Setor';
 function App() {
   const [funcionarioCadastrado,setFuncionarioCadastrado] = useState([])
 
+  const [setores, setSetor] = useState([])
+
     useEffect(()=>{
       fetch('https://localhost:7128/Funcionario', {
     method:'GET',
@@ -21,11 +23,49 @@ function App() {
     .catch((error)=>console.log(error))
     },[])
 
+    useEffect(()=>{
+      fetch('https://localhost:7128/Setor', {
+    method:'GET',
+    headers:{
+      'Content-Type': 'application/json',
+    },
+    })
+    .then(resp=>resp.json())
+    .then((data)=>{
+      setSetor(data)
+    })
+    .catch((error)=>console.log(error))
+    },[])
 
 
+    function createSetorPost(setor){
+      fetch('https://localhost:7128/Setor',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body: JSON.stringify(setor)
+      })
+      .catch((err)=>console.log(err))
+    }
+
+    function createFuncionarioPost(funcionario){
+      fetch('https://localhost:7128/Funcionario',{
+        method:"POST",
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(funcionario)
+      }
+      )
+      .catch((err)=>console.log(err))
+    }
+    function procuraSetorId(nomeSetor){
+      const setor = setores.find(setor=>setor.nome===nomeSetor)
+      return setor.setorId
+    }
 
   const aoNovoFuncionarioAdicionado = (funcionario) =>{
-    console.log(funcionario)
     const newFunc={
       funcionarioId:funcionario.funcionarioId,
       nome:funcionario.nome,
@@ -35,31 +75,17 @@ function App() {
         nome:funcionario.setor
       }
     }
+    const id = procuraSetorId(funcionario.setor)
+    const newFuncPost={
+      nome:funcionario.nome,
+      dataDeNascimento:funcionario.dataDeNascimento,
+      dataDeContratacao:funcionario.dataDeContratacao,
+      setorId:id
+    }
+    createFuncionarioPost(newFuncPost)
     setFuncionarioCadastrado
     ([...funcionarioCadastrado,newFunc])
   }
-  const [setores, setSetor] = useState( [
-    {
-      id:uuidv4(),
-      nome: 'TI',
-      cor:'#82CFFA'
-    },
-    {
-      id:uuidv4(),
-      nome: 'Engenharia',
-      cor:'#E06B69'
-    },
-    {
-      id:uuidv4(),
-      nome: 'RECURSOS HUMANOS',
-      cor:'#57C278'
-    },
-    {
-      id:uuidv4(),
-      nome: 'DESIGN',
-      cor:'#DB6EBF'
-    },
-  ])
 
   function deletarColaborador(id){
     setFuncionarioCadastrado(funcionarioCadastrado.filter(funcionario=>funcionario.funcionarioId !== id))
@@ -67,28 +93,58 @@ function App() {
 
   function mudarCorFuncionario(cor,id){
     setSetor(setores.map(setor=>{
-      if(setor.id === id){
+      if(setor.setorId === id){
         setor.cor=cor
       }
       return setor;
     }))
   }
+  
+  function ponto(id,tipo){
+    fetch(`https://localhost:7128/Ponto/${tipo}?FuncionarioId=${id}`,{
+      method:"POST",
+      headers:{
+        'Content-Type': 'application/json',
+      },
+
+    })
+    .then((res)=>console.log(res))
+    .catch((err)=>console.log(err))
+  }
+
+  function baterPonto(id,tipo){
+    ponto(id,tipo)
+  }
+
+  function aoSetorAdicionado(setor){
+    const setorPost={
+      nome:setor.nomeSetor,
+      cor:setor.cor
+    }
+    createSetorPost(setorPost)
+    setSetor([...setores,setor])
+  }
+
 
   return (
     <div className="App">
       <Banner />
       <Formulario 
-        setores={setores.map(setor => setor.nome)} 
+        setores={setores} 
         aoFuncionarioAdicionado={
           funcionario => aoNovoFuncionarioAdicionado(funcionario)}
+        newSetor={
+          setor => aoSetorAdicionado(setor)
+        }
       />
       {setores.map(setor=>
         <Setor 
-          key={setor.id}
-          id={setor.id}
+          key={setor.setorId}
+          id={setor.setorId}
           cor={setor.cor}
           mudarCor={mudarCorFuncionario} 
           nome={setor.nome}
+          ponto={baterPonto}
           funcionarios = {
             funcionarioCadastrado.filter(
               funcionario => funcionario.setor.nome === setor.nome

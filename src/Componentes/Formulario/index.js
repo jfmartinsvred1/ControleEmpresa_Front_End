@@ -8,7 +8,9 @@ const Formulario = (props) =>{
     const [nome, setNome] = useState('')
     const [dataDeNascimento, setData] = useState('')
     const [dataDeContratacao, setDataContratacao] = useState('')
-    const [setor, setSetor] = useState({nome:"th"});
+    const [setor, setSetor] = useState({nome:""});
+    const [cor, setCor] = useState('#ffffff')
+    const [nomeSetor, setNomeSetor] = useState("");
 
 
     const aoSalvar =(evento) => {
@@ -19,6 +21,14 @@ const Formulario = (props) =>{
             dataDeNascimento,
             dataDeContratacao,
             setor
+        })
+    }
+    const aoSalvarSetor =(evento) => {
+        evento.preventDefault()
+        props.newSetor({
+            setorId:uuidv4(),
+            nomeSetor,
+            cor
         })
     }
 
@@ -48,12 +58,34 @@ const Formulario = (props) =>{
                 aoAlterado={valor => setDataContratacao(valor)}
 
                 />
-                <ListaSuspensa 
-                label="Setor"
+                <ListaSuspensa
+                 label="Setor"
                  itens={props.setores}
                  valor={setor.nome}
                  aoAlterado={valor => setSetor(valor)}
                  />
+                <Botao>
+                    Adicionar
+                </Botao>
+            </form>
+            <form onSubmit={aoSalvarSetor}>
+                <h2>Preencha o nome do setor</h2>
+                <CampoTexto required={true}
+                label="Nome"
+                placeholder="Digite o nome do setor"
+                valor={nomeSetor}
+                aoAlterado={(valor) =>setNomeSetor(valor)}
+
+                />
+                <CampoTexto required={true}
+                label="Cor"
+                placeholder="Digite a cor em hexadecimal"
+                tipo="color"
+                valor={cor}
+                aoAlterado={valor =>setCor(valor)}
+
+                />
+                
                 <Botao>
                     Adicionar
                 </Botao>

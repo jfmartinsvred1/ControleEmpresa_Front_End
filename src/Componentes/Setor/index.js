@@ -13,6 +13,7 @@ const Setor = (props) => {
                 {
                     return (
                         <Funcionario
+                            baterPonto={props.ponto}
                             key={funcionario.funcionarioId}
                             id={funcionario.funcionarioId} 
                             nome={funcionario.nome}
