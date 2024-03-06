@@ -72,7 +72,7 @@ function App() {
       dataDeNascimento:funcionario.dataDeNascimento,
       dataDeContratacao:funcionario.dataDeContratacao,
       setor:{
-        nome:funcionario.setor
+        nome:funcionario.setorId
       }
     }
     const id = procuraSetorId(funcionario.setor)
