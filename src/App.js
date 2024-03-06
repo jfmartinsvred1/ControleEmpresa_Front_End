@@ -72,7 +72,7 @@ function App() {
       dataDeNascimento:funcionario.dataDeNascimento,
       dataDeContratacao:funcionario.dataDeContratacao,
       setor:{
-        nome:funcionario.setorId
+        nome:funcionario.setor
       }
     }
     const id = procuraSetorId(funcionario.setor)
@@ -80,7 +80,7 @@ function App() {
       nome:funcionario.nome,
       dataDeNascimento:funcionario.dataDeNascimento,
       dataDeContratacao:funcionario.dataDeContratacao,
-      setorId:id
+      setorId:id.setorId
     }
     createFuncionarioPost(newFuncPost)
     setFuncionarioCadastrado
