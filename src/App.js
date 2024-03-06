@@ -10,7 +10,7 @@ function App() {
   const [setores, setSetor] = useState([])
 
     useEffect(()=>{
-      fetch('https://controle-api.azurewebsites.net/Funcionario', {
+      fetch('https://localhost:7128/Funcionario', {
     method:'GET',
     headers:{
       'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ function App() {
     },[])
 
     useEffect(()=>{
-      fetch('https://controle-api.azurewebsites.net/Setor', {
+      fetch('https://localhost:7128/Setor', {
     method:'GET',
     headers:{
       'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ function App() {
 
 
     function createSetorPost(setor){
-      fetch('https://controle-api.azurewebsites.net/Setor',{
+      fetch('https://localhost:7128/Setor',{
         method:'POST',
         headers:{
           'Content-Type':'application/json'
@@ -50,7 +50,7 @@ function App() {
     }
 
     function createFuncionarioPost(funcionario){
-      fetch('https://controle-api.azurewebsites.net/Funcionario',{
+      fetch('https://localhost:7128/Funcionario',{
         method:"POST",
         headers:{
           'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ function App() {
       nome:funcionario.nome,
       dataDeNascimento:funcionario.dataDeNascimento,
       dataDeContratacao:funcionario.dataDeContratacao,
-      setorId:id.setorId
+      setorId:id
     }
     createFuncionarioPost(newFuncPost)
     setFuncionarioCadastrado
@@ -101,7 +101,7 @@ function App() {
   }
   
   function ponto(id,tipo){
-    fetch(`https://controle-api.azurewebsites.net/Ponto/${tipo}?FuncionarioId=${id}`,{
+    fetch(`https://localhost:7128/Ponto/${tipo}?FuncionarioId=${id}`,{
       method:"POST",
       headers:{
         'Content-Type': 'application/json',
