@@ -17,6 +17,7 @@ const Setor = (props) => {
                             key={funcionario.funcionarioId}
                             id={funcionario.funcionarioId} 
                             nome={funcionario.nome}
+                            urlGit={funcionario.urlGit}
                             corDeFundo={props.cor}
                             setor={funcionario.setor}
                             aoDeletar={props.aoDeletar}

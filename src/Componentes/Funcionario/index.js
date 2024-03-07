@@ -11,7 +11,7 @@ const Funcionario  = (props) => {
             <div className='deletar' onClick={()=>props.aoDeletar(props.id)}><FaTrash size={25} onMouseOver={()=>setColorLixeira('red')} onMouseOut={()=>setColorLixeira('black')}  style={{color:colorLixeira}}/></div>
             <div className='cabecalho' style={{backgroundColor: props.corDeFundo}}>
                 <img 
-                    src='https://github.com/jfmartinsvred1.png'
+                    src={`${props.urlGit}`}
                     alt='foto de perfil'
                 />
             </div>

@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 const Formulario = (props) =>{
     const [nome, setNome] = useState('')
     const [dataDeNascimento, setData] = useState('')
+    const [urlGit, setUrlGit] = useState('')
     const [dataDeContratacao, setDataContratacao] = useState('')
     const [setor, setSetor] = useState({nome:""});
     const [cor, setCor] = useState('#ffffff')
@@ -15,9 +16,11 @@ const Formulario = (props) =>{
 
     const aoSalvar =(evento) => {
         evento.preventDefault()
+        console.log(urlGit)
         props.aoFuncionarioAdicionado({
             funcionarioId:uuidv4(),
             nome,
+            urlGit:`${urlGit}.png`,
             dataDeNascimento,
             dataDeContratacao,
             setor
@@ -41,6 +44,13 @@ const Formulario = (props) =>{
                 placeholder="Digite o nome do funcionário"
                 valor={nome}
                 aoAlterado={valor =>setNome(valor)}
+
+                />
+                <CampoTexto required={true}
+                label="Url GitHub"
+                placeholder="Digite a url do seu github"
+                valor={urlGit}
+                aoAlterado={valor =>setUrlGit(valor)}
 
                 />
                 <CampoTexto 

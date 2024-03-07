@@ -69,6 +69,7 @@ function App() {
     const newFunc={
       funcionarioId:funcionario.funcionarioId,
       nome:funcionario.nome,
+      urlGit:funcionario.urlGit,
       dataDeNascimento:funcionario.dataDeNascimento,
       dataDeContratacao:funcionario.dataDeContratacao,
       setor:{
@@ -78,6 +79,7 @@ function App() {
     const id = procuraSetorId(funcionario.setor)
     const newFuncPost={
       nome:funcionario.nome,
+      urlGit:funcionario.urlGit,
       dataDeNascimento:funcionario.dataDeNascimento,
       dataDeContratacao:funcionario.dataDeContratacao,
       setorId:id
@@ -108,8 +110,8 @@ function App() {
       },
 
     })
-    .then((res)=>console.log(res))
-    .catch((err)=>console.log(err))
+    .then()
+    .catch()
   }
 
   function baterPonto(id,tipo){
